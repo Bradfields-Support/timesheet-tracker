@@ -7,7 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
     <script>
     (function(){
-        emailjs.init("2fjxs_QlZqz8uskuJ"); // Replace with your actual EmailJS Public Key
+        emailjs.init("-XWBaAUgy7AUfWo7X"); // Replace with your actual EmailJS Public Key
     })();
 
     function sendEmail(event) {
@@ -28,7 +28,7 @@
         };
 
         // Send email via EmailJS (Corrected publicKey position)
-        emailjs.send("service_2joqgmi", "template_e86ui0p", templateParams, "2fjxs_QlZqz8uskuJ")
+        emailjs.send("service_2joqgmi", "template_e86ui0p", templateParams, "-XWBaAUgy7AUfWo7X")
             .then(response => {
                 alert("Time log submitted successfully!");
                 document.getElementById("timeForm").reset(); // Reset form
