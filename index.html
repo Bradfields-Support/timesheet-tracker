@@ -7,7 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
     <script>
     (function(){
-        emailjs.init("service_2joqgmi"); // Replace with your EmailJS User ID
+        emailjs.init("support"); // Replace with your actual EmailJS User ID
     })();
 
     function sendEmail(event) {
@@ -19,23 +19,23 @@
         let hours = document.getElementById("hours").value;
         let details = document.getElementById("details").value;
 
-        // Prepare email parameters
+        // Prepare email parameters (match variables in EmailJS template)
         let templateParams = {
-            from_name: name,
+            from_name: name,  // Ensure these match your EmailJS template
             date: date,
             hours: hours,
             details: details
         };
 
         // Send email via EmailJS
-        emailjs.send("service_2joqgmi", "template_e86ui0p", templateParams)
+        emailjs.send("service_2joqgmi", "template_e86ui0p", templateParams, { publicKey: "2fjxs_QlZqz8uskuJ" }) // Add publicKey (your User ID)
             .then(response => {
                 alert("Time log submitted successfully!");
                 document.getElementById("timeForm").reset(); // Reset form
             })
             .catch(error => {
                 console.error("Error sending email:", error);
-                alert("Failed to submit time log.");
+                alert("Failed to submit time log. Check console for details.");
             });
     }
 </script>
