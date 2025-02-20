@@ -19,15 +19,15 @@
         let hours = document.getElementById("hours").value;
         let details = document.getElementById("details").value;
 
-        // Prepare email parameters (match variables in EmailJS template)
+        // Prepare email parameters
         let templateParams = {
-            from_name: name,  // Ensure these match your EmailJS template
+            from_name: name,
             date: date,
             hours: hours,
             details: details
         };
 
-        // Send email via EmailJS (Corrected publicKey position)
+        // Send email via EmailJS
         emailjs.send("service_bua5s5d", "template_e86ui0p", templateParams, "-XWBaAUgy7AUfWo7X")
             .then(response => {
                 alert("Time log submitted successfully!");
@@ -39,23 +39,87 @@
             });
     }
     </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+        img {
+            width: 150px;
+            margin-bottom: 15px;
+        }
+        h2 {
+            margin-bottom: 15px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+        }
+        label {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        input, textarea {
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 100%;
+            font-size: 16px;
+        }
+        textarea {
+            resize: vertical;
+            height: 80px;
+        }
+        button {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-    <h2>Time Tracking Form</h2>
-    <form id="timeForm" onsubmit="sendEmail(event)">
-        <label for="name">Name:</label>
-        <input type="text" id="name" required><br>
+    <div class="container">
+        <img src="your-logo-url-here.png" alt="Bradfield's Logo"> 
+        <h2>Time Tracking Form</h2>
+        <form id="timeForm" onsubmit="sendEmail(event)">
+            <label for="name">Name:</label>
+            <input type="text" id="name" required>
 
-        <label for="date">Date:</label>
-        <input type="date" id="date" required><br>
+            <label for="date">Date:</label>
+            <input type="date" id="date" required>
 
-        <label for="hours">Hours Worked:</label>
-        <input type="number" id="hours" step="0.1" required><br>
+            <label for="hours">Hours Worked:</label>
+            <input type="number" id="hours" step="0.1" required>
 
-        <label for="details">Details:</label>
-        <textarea id="details" required></textarea><br>
+            <label for="details">Details:</label>
+            <textarea id="details" required></textarea>
 
-        <button type="submit">Submit</button>
-    </form>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
 </body>
 </html>
