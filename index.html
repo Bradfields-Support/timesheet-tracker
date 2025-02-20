@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Tracking Form</title>
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+    <script>
+    (function(){
+        emailjs.init("service_2joqgmi"); // Replace with your EmailJS User ID
+    })();
+
+    function sendEmail(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        // Get form values
+        let name = document.getElementById("name").value;
+        let date = document.getElementById("date").value;
+        let hours = document.getElementById("hours").value;
+        let details = document.getElementById("details").value;
+
+        // Prepare email parameters
+        let templateParams = {
+            from_name: name,
+            date: date,
+            hours: hours,
+            details: details
+        };
+
+        // Send email via EmailJS
+        emailjs.send("service_2joqgmi", "template_e86ui0p", templateParams)
+            .then(response => {
+                alert("Time log submitted successfully!");
+                document.getElementById("timeForm").reset(); // Reset form
+            })
+            .catch(error => {
+                console.error("Error sending email:", error);
+                alert("Failed to submit time log.");
+            });
+    }
+</script>
+
+</head>
+<body>
+    <h2>Time Tracking Form</h2>
+    <form id="timeForm" onsubmit="sendEmail(event)">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required><br>
+
+        <label for="date">Date:</label>
+        <input type="date" id="date" required><br>
+
+        <label for="hours">Hours Worked:</label>
+        <input type="number" id="hours" step="0.1" required><br>
+
+        <label for="details">Details:</label>
+        <textarea id="details" required></textarea><br>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
