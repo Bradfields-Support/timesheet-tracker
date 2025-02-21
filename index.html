@@ -31,7 +31,7 @@ function sendEmail(event) {
         alert("Time log submitted successfully!");
 
         // Store the data in Google Sheets
-        fetch("YOUR_GOOGLE_SCRIPT_URL", {
+        fetch("https://script.google.com/macros/s/AKfycbxeER-14Ea5ijHAJhDQJNAgN3rCjE_GpAC4t93HKZuVUWLxJtm_LZEIAPLa_-NJV2G26w/exec", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
