@@ -6,39 +6,54 @@
     <title>Time Tracking Form</title>
     <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
     <script>
-    (function(){
-        emailjs.init("-XWBaAUgy7AUfWo7X"); // Replace with your actual EmailJS Public Key
-    })();
+(function(){
+    emailjs.init("-XWBaAUgy7AUfWo7X"); // Your EmailJS Public Key
+})();
 
-    function sendEmail(event) {
-        event.preventDefault(); // Prevent default form submission
+function sendEmail(event) {
+    event.preventDefault(); // Prevent default form submission
 
-        // Get form values
-        let name = document.getElementById("name").value;
-        let date = document.getElementById("date").value;
-        let hours = document.getElementById("hours").value;
-        let details = document.getElementById("details").value;
+    let name = document.getElementById("name").value;
+    let date = document.getElementById("date").value;
+    let hours = document.getElementById("hours").value;
+    let details = document.getElementById("details").value;
 
-        // Prepare email parameters
-        let templateParams = {
-            from_name: name,
-            date: date,
-            hours: hours,
-            details: details
-        };
+    let templateParams = {
+        from_name: name,
+        date: date,
+        hours: hours,
+        details: details
+    };
 
-        // Send email via EmailJS
-        emailjs.send("service_bua5s5d", "template_e86ui0p", templateParams, "-XWBaAUgy7AUfWo7X")
-            .then(response => {
-                alert("Time log submitted successfully!");
-                document.getElementById("timeForm").reset(); // Reset form
+    // Send email via EmailJS
+    emailjs.send("service_bua5s5d", "template_e86ui0p", templateParams, "-XWBaAUgy7AUfWo7X")
+    .then(response => {
+        alert("Time log submitted successfully!");
+
+        // Store the data in Google Sheets
+        fetch("YOUR_GOOGLE_SCRIPT_URL", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                name: name,
+                date: date,
+                hours: hours,
+                details: details
             })
-            .catch(error => {
-                console.error("Error sending email:", error);
-                alert("Failed to submit time log. Check console for details.");
-            });
-    }
-    </script>
+        })
+        .then(response => response.text())
+        .then(data => console.log("Google Sheets response:", data))
+        .catch(error => console.error("Error saving to Google Sheets:", error));
+
+        document.getElementById("timeForm").reset(); // Reset form
+    })
+    .catch(error => {
+        console.error("Error sending email:", error);
+        alert("Failed to submit time log. Check console for details.");
+    });
+}
+</script>
+
     <style>
         body {
             font-family: Arial, sans-serif;
